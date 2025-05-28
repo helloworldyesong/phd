@@ -4,13 +4,22 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 import joblib
 
 # 모델 및 스케일러 로딩
 model_os = joblib.load("cox_model_os.pkl")
 model_surg = joblib.load("cox_model_surg.pkl")
-scaler_surg = joblib.load("scaler_surg.pkl")
-scaler_surv = joblib.load("scaler_os.pkl")
+# 수술용 스케일러
+scaler_surg = StandardScaler()
+scaler_surg.mean_ = np.array([ 2.26919498 63.99232246  0.94817658  6.90802785])
+scaler_surg.scale_ = np.array([ 1.57492797 10.08580931  0.76587582  0.69875102])
+
+# 생존용 스케일러
+scaler_surv = StandardScaler()
+scaler_surv.mean_ = np.array([2.26919498 1.58000339 1.72186624 6.90802785 5.21174457 0.94817658])
+scaler_surv.scale_ = np.array([1.57492797 0.25980689 2.01686846 0.69875102 0.79614296 0.76587582])
+
 
 st.set_page_config(layout="wide")
 st.title("🔍 생존 예측 및 수술 가능성 평가")
