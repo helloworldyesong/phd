@@ -51,7 +51,6 @@ piv = (anc * plt_val * mono) / (lymph + 1e-6)
 log_piv = np.log1p(piv)
 
 df_surg = pd.DataFrame([{
-    "LOG_CEA": log_cea,
     "AGE": age,
     "META_COUNT": meta_count,
     "LOG_PIV": log_piv
@@ -64,8 +63,8 @@ df_surv = pd.DataFrame([{
     "LOG_ALB": log_alb,
     "lasso_risk": surg_risk,
     "LOG_PIV": log_piv,
-    "LOG_ALP": log_alp,
-    "META_COUNT": meta_count
+    #"LOG_ALP": log_alp,
+    #"META_COUNT": meta_count
 }])
 df_surv_scaled = pd.DataFrame(scaler_surv.transform(df_surv), columns=df_surv.columns)
 
