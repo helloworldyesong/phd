@@ -86,7 +86,7 @@ surg_probs = [round(1 - surg.iloc[get_nearest_time_index(surg, t)].values[0], 3)
 #st.markdown("###  수술 가능 점수")
 st.metric("⚠️ 수술 가능 점수 (relative score)", round(surg_risk, 3))
 
-st.markdown("### 📊 예측 확률 (1년 / 3년)")
+#st.markdown("### 📊 예측 확률 (1년 / 3년)")
 result_df = pd.DataFrame({
     "구분": ["생존 확률", "수술 가능성"],
     "1년": [surv_probs[0], surg_probs[0]],
