@@ -46,7 +46,7 @@ with st.sidebar:
 # ----------------------
 log_cea = np.log1p(cea)
 log_alb = np.log1p(alb)
-log_alp = np.log1p(alp)
+#log_alp = np.log1p(alp)
 piv = (anc * plt_val * mono) / (lymph + 1e-6)
 log_piv = np.log1p(piv)
 
