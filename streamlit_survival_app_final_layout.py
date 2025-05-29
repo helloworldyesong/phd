@@ -30,7 +30,6 @@ st.title("수술 가능성 및 생존 예측")
 with st.sidebar:
     st.header("🛠️ 수술 관련 변수")
     age = st.number_input("Age", value=65)
-    cea = st.number_input("CEA (ng/mL)", value=20.0)
     anc = st.number_input("ANC (10^3/μL)", value=3.0)
     plt_val = st.number_input("Platelet (10^3/μL)", value=250.0)
     mono = st.number_input("Monocyte (10^3/μL)", value=0.4)
@@ -39,7 +38,8 @@ with st.sidebar:
 
     st.header("🌱 생존 관련 변수")
     alb = st.number_input("Albumin (g/dL)", value=4.0)
-    alp = st.number_input("ALP (IU/L)", value=100.0)
+    cea = st.number_input("CEA (ng/mL)", value=20.0)
+    #alp = st.number_input("ALP (IU/L)", value=100.0)
 
 # ----------------------
 # 내부 계산
