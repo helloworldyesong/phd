@@ -28,7 +28,7 @@ st.title("수술 가능성 및 생존 예측")
 # 사이드바: 변수 입력 (고정)
 # ----------------------
 with st.sidebar:
-    st.header("🛠️ 수술 관련 변수")
+    #st.header("🛠️ 수술 관련 변수")
     age = st.number_input("Age", value=65)
     anc = st.number_input("ANC (10^3/μL)", value=3.0)
     plt_val = st.number_input("Platelet (10^3/μL)", value=250.0)
@@ -36,7 +36,7 @@ with st.sidebar:
     lymph = st.number_input("Lymphocyte (10^3/μL)", value=1.5)
     meta_count = int(st.selectbox("Metastasis Count", ["0", "1", "2", "3", "4"], index=1))
 
-    st.header("🌱 생존 관련 변수")
+    #st.header("🌱 생존 관련 변수")
     alb = st.number_input("Albumin (g/dL)", value=4.0)
     cea = st.number_input("CEA (ng/mL)", value=20.0)
     #alp = st.number_input("ALP (IU/L)", value=100.0)
