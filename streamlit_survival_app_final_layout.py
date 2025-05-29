@@ -17,8 +17,8 @@ scaler_surg.scale_ = np.array([10.08580931,  0.76587582 , 0.69875102])
 
 # 생존용 스케일러
 scaler_surv = StandardScaler()
-scaler_surv.mean_ = np.array([2.26919498 ,1.58000339 ,6.90802785, 0.94817658, 1.55977243])
-scaler_surv.scale_ = np.array([1.57492797 ,0.25980689, 0.69875102 ,0.76587582, 1.64411436])
+scaler_surv.mean_ = np.array([2.26919498, 1.58000339, 6.90802785, 1.55977243])
+scaler_surv.scale_ = np.array([1.57492797, 0.25980689, 0.69875102, 1.64411436])
 
 
 st.set_page_config(layout="wide")
@@ -61,10 +61,9 @@ surg_risk = model_surg.predict_partial_hazard(df_surg_scaled).values[0]
 df_surv = pd.DataFrame([{
     "LOG_CEA": log_cea,
     "LOG_ALB": log_alb,
-    "lasso_risk": surg_risk,
     "LOG_PIV": log_piv,
-    #"LOG_ALP": log_alp,
-    #"META_COUNT": meta_count
+    "lasso_risk": surg_risk,
+
 }])
 df_surv_scaled = pd.DataFrame(scaler_surv.transform(df_surv), columns=df_surv.columns)
 
