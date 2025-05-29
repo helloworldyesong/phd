@@ -12,13 +12,13 @@ model_os = joblib.load("cox_model_os.pkl")
 model_surg = joblib.load("cox_model_surg.pkl")
 # 수술용 스케일러
 scaler_surg = StandardScaler()
-scaler_surg.mean_ = np.array([ 2.26919498 ,63.99232246,  0.94817658,  6.90802785])
-scaler_surg.scale_ = np.array([ 1.57492797, 10.08580931  ,0.76587582 , 0.69875102])
+scaler_surg.mean_ = np.array([63.99232246  0.94817658  6.90802785])
+scaler_surg.scale_ = np.array([10.08580931  0.76587582  0.69875102])
 
 # 생존용 스케일러
 scaler_surv = StandardScaler()
-scaler_surv.mean_ = np.array([2.26919498, 1.58000339, 1.72186624, 6.90802785, 5.21174457 ,0.94817658])
-scaler_surv.scale_ = np.array([1.57492797, 0.25980689 ,2.01686846 ,0.69875102, 0.79614296, 0.76587582])
+scaler_surv.mean_ = np.array([2.26919498 1.58000339 6.90802785 0.94817658 1.55977243])
+scaler_surv.scale_ = np.array([1.57492797 0.25980689 0.69875102 0.76587582 1.64411436])
 
 
 st.set_page_config(layout="wide")
