@@ -86,7 +86,7 @@ surg_probs = [round(1 - surg.iloc[get_nearest_time_index(surg, t)].values[0], 3)
 # 본문: 출력 섹션
 # ----------------------
 st.markdown("### ⚠️ 수술 가능 점수")
-st.metric("수술 위험도 (relative hazard)", round(surg_risk, 3))
+st.metric("수술 가능 점수 (relative score)", round(surg_risk, 3))
 
 st.markdown("### 📊 예측 확률 (1년 / 3년)")
 result_df = pd.DataFrame({
