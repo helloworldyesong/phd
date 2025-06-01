@@ -22,7 +22,7 @@ scaler_surv.scale_ = np.array([0.12164714 ,1.57492797, 0.15935475, 1.90944101])
 
 
 st.set_page_config(layout="wide")
-st.title("수술 가능성 및 생존 예측")
+st.title("Conversion Surgery/Survival Prediction for BTC Patients")
 
 # ----------------------
 # 사이드바: 변수 입력 (고정)
@@ -83,7 +83,7 @@ surg_probs = [round(1 - surg.iloc[get_nearest_time_index(surg, t)].values[0], 3)
 # 본문: 출력 섹션
 # ----------------------
 #st.markdown("###  수술 가능 점수")
-st.metric("⚠️ 수술 가능 점수 (relative score)", round(surg_risk, 3))
+st.metric("⚠️ risk score:", round(surg_risk, 3))
 
 #st.markdown("### 📊 예측 확률 (1년 / 3년)")
 result_df = pd.DataFrame({
@@ -99,7 +99,7 @@ st.table(result_df.set_index("구분"))
 col_left, col_right = st.columns(2)
 
 with col_left:
-    st.markdown("### 📈 수술 가능성 곡선")
+    st.markdown("### 📈 Conversional Surgery Curve")
     fig1, ax1 = plt.subplots()
     (1 - surg).plot(ax=ax1)
     ax1.axvline(x=365, color='gray', linestyle='--', label='1년')
@@ -111,7 +111,7 @@ with col_left:
     st.pyplot(fig1)
 
 with col_right:
-    st.markdown("### 📈 생존 곡선")
+    st.markdown("### 📈 Survival Curve")
     fig2, ax2 = plt.subplots()
     surv.plot(ax=ax2)
     ax2.axvline(x=365, color='gray', linestyle='--', label='1년')
