@@ -12,13 +12,13 @@ model_os = joblib.load("cox_model_os.pkl")
 model_surg = joblib.load("cox_model_surg.pkl")
 # 수술용 스케일러
 scaler_surg = StandardScaler()
-scaler_surg.mean_ = np.array([63.99232246,  0.94817658  ,6.90802785])
-scaler_surg.scale_ = np.array([10.08580931,  0.76587582 , 0.69875102])
+scaler_surg.mean_ = np.array([63.99232246  ,1.0134357  , 1.54403209])
+scaler_surg.scale_ = np.array([10.08580931  ,0.77991332 , 0.48392628])
 
 # 생존용 스케일러
 scaler_surv = StandardScaler()
-scaler_surv.mean_ = np.array([2.26919498, 1.58000339, 6.90802785, 1.55977243])
-scaler_surv.scale_ = np.array([1.57492797, 0.25980689, 0.69875102, 1.64411436])
+scaler_surv.mean_ = np.array([1.55442944 ,2.26919498, 0.42199001 ,1.6604481 ])
+scaler_surv.scale_ = np.array([0.12164714 ,1.57492797, 0.15935475, 1.90944101])
 
 
 st.set_page_config(layout="wide")
@@ -31,13 +31,12 @@ with st.sidebar:
     #st.header("🛠️ 수술 관련 변수")
     age = st.number_input("Age", value=65)
     anc = st.number_input("ANC (10^3/μL)", value=3.0)
-    plt_val = st.number_input("Platelet (10^3/μL)", value=250.0)
-    mono = st.number_input("Monocyte (10^3/μL)", value=0.4)
     lymph = st.number_input("Lymphocyte (10^3/μL)", value=1.5)
     meta_count = int(st.selectbox("Metastasis Count", ["0", "1", "2", "3", "4"], index=1))
 
     #st.header("🌱 생존 관련 변수")
     alb = st.number_input("Albumin (g/dL)", value=4.0)
+    mono = st.number_input("Monocyte (10^3/μL)", value=0.4)
     cea = st.number_input("CEA (ng/mL)", value=20.0)
     #alp = st.number_input("ALP (IU/L)", value=100.0)
 
@@ -46,14 +45,15 @@ with st.sidebar:
 # ----------------------
 log_cea = np.log1p(cea)
 log_alb = np.log1p(alb)
+log_mono=np.log1p(mono)
 #log_alp = np.log1p(alp)
-piv = (anc * plt_val * mono) / (lymph + 1e-6)
-log_piv = np.log1p(piv)
+nlr = (anc) / (lymph + 1e-6)
+log_nlr = np.log1p(nlr)
 
 df_surg = pd.DataFrame([{
     "AGE": age,
     "META_COUNT": meta_count,
-    "LOG_PIV": log_piv
+    "LOG_NLR": log_nlr
 }])
 df_surg_scaled = pd.DataFrame(scaler_surg.transform(df_surg), columns=df_surg.columns)
 surg_risk = model_surg.predict_partial_hazard(df_surg_scaled).values[0]
@@ -61,7 +61,7 @@ surg_risk = model_surg.predict_partial_hazard(df_surg_scaled).values[0]
 df_surv = pd.DataFrame([{
     "LOG_CEA": log_cea,
     "LOG_ALB": log_alb,
-    "LOG_PIV": log_piv,
+    "LOG_MONO": log_mono,
     "lasso_risk": surg_risk,
 
 }])
