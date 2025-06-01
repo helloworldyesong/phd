@@ -85,13 +85,13 @@ surg_probs = [round(1 - surg.iloc[get_nearest_time_index(surg, t)].values[0], 3)
 #st.markdown("###  수술 가능 점수")
 st.metric("⚠️ risk score:", round(surg_risk, 3))
 
-#st.markdown("### 📊 예측 확률 (1년 / 3년)")
+#st.markdown("### 📊 Survival Probability (1y / 3y)")
 result_df = pd.DataFrame({
-    "구분": ["생존 확률", "수술 가능성"],
-    "1년": [surv_probs[0], surg_probs[0]],
-    "3년": [surv_probs[1], surg_probs[1]]
+    "Division": ["Survival", "Conversional Surgery"],
+    "1-years": [surv_probs[0], surg_probs[0]],
+    "3-years": [surv_probs[1], surg_probs[1]]
 })
-st.table(result_df.set_index("구분"))
+st.table(result_df.set_index("Division"))
 
 # ----------------------
 # 그래프 섹션
