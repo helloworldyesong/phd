@@ -59,11 +59,10 @@ df_surg_scaled = pd.DataFrame(scaler_surg.transform(df_surg), columns=df_surg.co
 surg_risk = model_surg.predict_partial_hazard(df_surg_scaled).values[0]
 
 df_surv = pd.DataFrame([{
-    "LOG_CEA": log_cea,
+    "lasso_risk": surg_risk,
     "LOG_ALB": log_alb,
     "LOG_MONO": log_mono,
-    "lasso_risk": surg_risk,
-
+    "LOG_CEA": log_cea,
 }])
 df_surv_scaled = pd.DataFrame(scaler_surv.transform(df_surv), columns=df_surv.columns)
 
