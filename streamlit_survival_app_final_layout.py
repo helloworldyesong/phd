@@ -83,7 +83,7 @@ surg_probs = [round(1 - surg.iloc[get_nearest_time_index(surg, t)].values[0], 3)
 # 본문: 출력 섹션
 # ----------------------
 #st.markdown("###  수술 가능 점수")
-st.metric("⚠️ risk score:", round(surg_risk, 3))
+st.metric("⚠️ conversion score:", round(surg_risk, 3))
 
 #st.markdown("### 📊 Survival Probability (1y / 3y)")
 result_df = pd.DataFrame({
